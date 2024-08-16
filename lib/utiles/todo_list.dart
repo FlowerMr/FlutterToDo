@@ -1,8 +1,5 @@
-import 'dart:js_interop_unsafe';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:todo/main.dart';
 
 class ToDoList extends StatelessWidget {
   const ToDoList(
@@ -27,7 +24,7 @@ class ToDoList extends StatelessWidget {
       ),
       child: Slidable(
         endActionPane: ActionPane(
-          motion: StretchMotion(),
+          motion: const StretchMotion(),
           children: [
             SlidableAction(
               onPressed: deletefunction,
@@ -41,7 +38,7 @@ class ToDoList extends StatelessWidget {
               color: Colors.deepPurple,
               borderRadius: BorderRadius.circular(15)),
           padding: const EdgeInsets.all(20),
-          color: Colors.deepPurple,
+          //   color: Colors.deepPurple,
           child: Row(
             children: [
               Checkbox(
