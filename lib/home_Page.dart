@@ -26,6 +26,13 @@ class _HomePageState extends State<HomePage> {
   void saveNewTask() {
     setState(() {
       toDoList.add([_controller.text, false]);
+      _controller.clear();
+    });
+  }
+
+  void deleteTask(int index) {
+    setState(() {
+      toDoList.removeAt(index);
     });
   }
 
@@ -45,6 +52,7 @@ class _HomePageState extends State<HomePage> {
               taskName: toDoList[index][0],
               taskCompleted: toDoList[index][1],
               onChanged: (value) => checkBoxChanged(index),
+              deletefunction: (BuildContext context) => deleteTask(index),
             );
           }),
       floatingActionButton: Row(
