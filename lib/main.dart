@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:todo/utiles/todo_list.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  MainApp({super.key});
 
   List toDoList = [
     ['Flutter Lernen', false],
-    ['Dart Lernen', false]
+    ['Dart Lernen', false],
+    // ['code Lernen', false]
   ];
+  checkBoxChanged(int index) {
+    toDoList[index][1] = !toDoList[index][1];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +29,10 @@ class MainApp extends StatelessWidget {
       body: ListView.builder(
           itemCount: toDoList.length,
           itemBuilder: (BuildContext context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Container(
-                decoration: ,
-                padding: EdgeInsets.all(20),
-                color: Colors.deepPurple,
-                child: Text(toDoList[index][0],style: TextStyle(fontSize: 18,color: Colors.white),),
-              ),
+            return ToDoList(
+              taskName: toDoList[index][0],
+              taskCompleted: toDoList[index][1],
+              onChanged: (value) => checkBoxChanged(index),
             );
           }),
     );
