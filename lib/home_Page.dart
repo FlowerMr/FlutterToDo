@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo/utiles/todo_list.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,15 +12,36 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _controller = TextEditingController();
-  List toDoList = [
-    ['Flutter Lernen', false],
-    ['Dart Lernen', false],
-    // ['code Lernen', false]
-  ];
+  List toDoList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadData(); // Load saved data when the app starts
+  }
+
+  // Load data from SharedPreferences
+  void loadData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? savedData = prefs.getString('todo_list');
+    if (savedData != null) {
+      setState(() {
+        toDoList = jsonDecode(savedData);
+      });
+    }
+  }
+
+  // Save data to SharedPreferences
+  void saveData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('todo_list', jsonEncode(toDoList));
+  }
+
   void checkBoxChanged(int index) {
     setState(() {
       toDoList[index][1] = !toDoList[index][1];
     });
+    saveData();
   }
 
   void saveNewTask() {
@@ -26,12 +49,14 @@ class _HomePageState extends State<HomePage> {
       toDoList.add([_controller.text, false]);
       _controller.clear();
     });
+    saveData();
   }
 
   void deleteTask(int index) {
     setState(() {
       toDoList.removeAt(index);
     });
+    saveData();
   }
 
   @override
