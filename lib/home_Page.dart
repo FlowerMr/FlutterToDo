@@ -55,31 +55,36 @@ class _HomePageState extends State<HomePage> {
               deletefunction: (BuildContext context) => deleteTask(index),
             );
           }),
-      floatingActionButton: Row(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextField(
-                controller: _controller,
-                decoration: InputDecoration(
-                    hintText: "Add a new Item",
-                    filled: true,
-                    fillColor: Colors.deepPurple.shade200,
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.deepPurple),
-                        borderRadius: BorderRadius.circular(15)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.deepPurple),
-                        borderRadius: BorderRadius.circular(15))),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: _controller,
+                  decoration: InputDecoration(
+                      hintText: "Add a new Item",
+                      filled: true,
+                      fillColor: Colors.deepPurple.shade200,
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.deepPurple),
+                          borderRadius: BorderRadius.circular(15)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.deepPurple),
+                          borderRadius: BorderRadius.circular(15))),
+                ),
               ),
             ),
-          ),
-          FloatingActionButton(
-            onPressed: saveNewTask,
-            child: const Icon(Icons.add),
-          ),
-        ],
+            FloatingActionButton(
+              onPressed: saveNewTask,
+              child: const Icon(Icons.add),
+            ),
+          ],
+        ),
       ),
     );
   }
